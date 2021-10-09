@@ -16,9 +16,9 @@ var u = []m.User{
 
 // method: GET `/`
 func GetHome(w http.ResponseWriter, r *http.Request) {
-	res, _ := s.NewResponse(w, s.Response {
-			Data: u, Route: r.URL.Path, Method: r.Method, Status: http.StatusOK, Message: nil,
-		})
-	s.Log.Printf("[%s] '%s'\n", r.Method, r.URL.Path)
-	w.Write(res)
+    res, _ := s.NewResponse(w, s.Response {
+            Data: u, Route: r.URL.Path, Method: r.Method, Status: http.StatusOK, Message: nil,
+        })
+    s.Log.Printf("[%s] '%s'\n", r.Method, r.URL.Path)
+    w.Write(res)
 }

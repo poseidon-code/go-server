@@ -7,11 +7,11 @@ import (
 
 // Response structure for every response sent from server
 type Response struct {
-    Data        interface{}     `json:"data,omitempty"`			// omits if nil (use nil when errors)
+    Data        interface{}     `json:"data,omitempty"`     // omits if nil (use nil when errors)
     Route       string          `json:"route"`
     Method      string          `json:"method"`
     Status      int             `json:"status"`
-    Message     interface{}     `json:"message,omitempty"`		// omits if nil (use nil when no-errors)
+    Message     interface{}     `json:"message,omitempty"`  // omits if nil (use nil when no-errors)
 }
 
 
