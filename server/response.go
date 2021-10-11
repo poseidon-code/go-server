@@ -43,3 +43,14 @@ func NFResponse(w http.ResponseWriter, r *http.Request)  {
     Log.Printf("[%s] '%s' : Not Found\n", r.Method, r.URL.Path)
     w.Write(res)
 }
+
+
+// Response : Invalid Query
+/* Creates a new response of server.Response{} type, with "Invalid Query" message, prints the Log to console, and sends the response. */
+func IVQResponse(w http.ResponseWriter, r *http.Request) {
+    res, _ := NewResponse(w, Response {
+        Data: nil, Route: r.URL.Path, Method: r.Method, Status: http.StatusNotAcceptable, Message: "Invalid query `?"+r.URL.RawQuery+"` for endpoint `"+r.URL.Path+"`",
+    })
+    Log.Printf("[%s] '%s' : Invalid Query\n", r.Method, r.URL.Path+"?"+r.URL.RawQuery)
+    w.Write(res)
+}

@@ -11,11 +11,17 @@ import (
 func Home(w http.ResponseWriter, r *http.Request) {
     s.Headers(w)                    // include Request Headers
 
+    query := r.URL.Query()
+
     if r.URL.Path == "/" {
         switch r.Method {           // handle methods on `/`
         case http.MethodOptions:
         case http.MethodGet:        // handle GET on `/`
-            c.GetHome(w, r)
+            if len(query)==0 {      // default (`/`)
+                c.GetHome(w, r)
+            } else {                // invalid query on GET `/`
+                s.IVQResponse(w, r)
+            }
         default:                    // handle other unhandled methods
             s.MNAResponse(w, r)
         }

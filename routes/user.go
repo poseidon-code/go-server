@@ -12,15 +12,17 @@ func User(w http.ResponseWriter, r *http.Request) {
     s.Headers(w)                            // include Request Headers
 
     query := r.URL.Query()
-
+    
     if r.URL.Path == "/user/" {             // handle `/user/` route
         switch r.Method {                   // handle methods on `/user/`
         case http.MethodOptions:
         case http.MethodGet:                // handle GET on `/user/`
-            if query["id"]!=nil {           // use query 'id' (`/user/?id=`)
+            if query["id"]!=nil && len(query)==1 {          // use query 'id' (`/user/?id=`)
                 c.GetUserId(w, r)
-            } else {                        // default (`/user/`)
+            } else if len(query)==0 {                       // default (`/user/`)
                 c.GetRandomUser(w, r)
+            } else {                                        // invalid query on GET `/user/`
+                s.IVQResponse(w, r)
             }
         default:                            // handle other unhandled methods
             s.MNAResponse(w, r)
