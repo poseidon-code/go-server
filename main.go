@@ -9,9 +9,8 @@ import (
 
 
 func main() {
-    mux := http.NewServeMux()       // create Mux (router)
-    server := s.New(mux, ":5000")   // create http.Server with config (app)
-
+    mux := http.NewServeMux()           // create Mux (router)
+    server := s.New(mux, "5000")        // create http.Server with config (app)
 
     // ROUTES
     mux.HandleFunc("/", r.Home)
@@ -19,8 +18,8 @@ func main() {
 
 
     // server starting & listening
-    s.Log.Println("Starting Server on http://localhost:5000")
+    s.Log.Println("Starting Server on http://localhost"+server.Addr)
     err := server.ListenAndServe(); if err!=nil {
-    s.Log.Fatalln("Error Starting Server at http://localhost:5000 :\n", err)
+        s.Log.Fatalln("Error Starting Server at http://localhost"+server.Addr+" :\n", err)
     }
 }
