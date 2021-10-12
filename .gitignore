@@ -1,0 +1,4 @@
+# This (.env) file should not to be uploaded to any publicly faced code repository (eg. Github, Gitlab, etc.)
+# as it contains secret/private informations/keys/passwords regarding server, databases and other services.
+# This file needs to ignored while using version control, (i.e. using .gitignore)
+.env
