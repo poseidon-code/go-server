@@ -29,7 +29,7 @@ func MNAResponse(w http.ResponseWriter, r *http.Request)  {
     res, _ := NewResponse(w, Response {
         Data: nil, Route: r.URL.Path, Method: r.Method, Status: http.StatusMethodNotAllowed, Message: "["+r.Method+"] `"+r.URL.Path+"` Not Allowed",
     })
-    Log.Printf("[%s] '%s' : Not Allowed\n", r.Method, r.URL.Path)
+    Log.Printf("[%s] '%s' : Not Allowed\n", r.Method, r.URL.Path+"?"+r.URL.RawQuery)
     w.Write(res)
 }
 
@@ -40,7 +40,7 @@ func NFResponse(w http.ResponseWriter, r *http.Request)  {
     res, _ := NewResponse(w, Response {
         Data: nil, Route: r.URL.Path, Method: r.Method, Status: http.StatusNotFound, Message: "Endpoint `"+r.URL.Path+"` Not Found",
     })
-    Log.Printf("[%s] '%s' : Not Found\n", r.Method, r.URL.Path)
+    Log.Printf("[%s] '%s' : Not Found\n", r.Method, r.URL.Path+"?"+r.URL.RawQuery)
     w.Write(res)
 }
 

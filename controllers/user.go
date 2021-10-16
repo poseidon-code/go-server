@@ -16,6 +16,8 @@ func GetRandomUser(w http.ResponseWriter, r *http.Request) {
     res, _ := s.NewResponse(w, s.Response{
             Data: u[random],Route: r.URL.Path, Method: r.Method, Status: http.StatusOK, Message: nil,
         })
+    
+    s.Log.Printf("[%s] '%s'\n", r.Method, r.URL.Path+"?"+r.URL.RawQuery)
     w.Write(res)
 }
 
@@ -42,4 +44,6 @@ func GetUserId(w http.ResponseWriter, r *http.Request) {
             })
         w.Write(res)
     }
+
+    s.Log.Printf("[%s] '%s'\n", r.Method, r.URL.Path+"?"+r.URL.RawQuery)
 }
