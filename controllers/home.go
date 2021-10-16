@@ -19,6 +19,6 @@ func GetHome(w http.ResponseWriter, r *http.Request) {
     res, _ := s.NewResponse(w, s.Response {
             Data: u, Route: r.URL.Path, Method: r.Method, Status: http.StatusOK, Message: nil,
         })
-    s.Log.Printf("[%s] '%s'\n", r.Method, r.URL.Path)
+    s.Log.Printf("[%s] '%s'\n", r.Method, r.URL.Path+"?"+r.URL.RawQuery)
     w.Write(res)
 }
