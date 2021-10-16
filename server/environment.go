@@ -7,19 +7,15 @@ import (
 )
 
 // Environment Variables structure for reading environment variables
-// PORT : (required) eg. PORT=5000
-// (Heroku deployment of any Go based REST server does not requires to manually set a 'PORT' varaible in Heroku's config,
-// instead it is mandatory to handle 'PORT' environment variable provided by Heroku, inside the program, using os.Getenv("PORT"))
-// ADD : new entries for every new environment variables in '.env'
+// PORT (required) : eg. PORT=5000
+// TODO : add new entries for every new environment variables in '.env'
 type EnvironmentVariables struct {
-    // Checks & sets, if 'PORT' environment variable is set, else sets passed 'PORT' value from server.New()
-    // this checks enables to comply with Heroku 'PORT' configuration when deploying to Heroku,
-    // even if during development one could set any value for 'PORT',
-    // but in production, that 'PORT' value will be set by Heroku using environment varibales
-    // (assuming this case, it will be set by Heroku by default)
+    // (Heroku deployment of any Go based REST server does not requires to manually set a 'PORT' varaible in Heroku's config,
+    // instead it is mandatory to handle 'PORT' environment variable provided by Heroku, inside the program, using os.Getenv("PORT"))
+    // DO NOT REMOVE 'Port'
     Port    string
 
-    // other .env fields should also be added
+    // other .env fields should also be added for convenience of accessing/structuring them
 }
 
 
@@ -38,14 +34,15 @@ func LoadEnvironment(port string) {
 
     // setting environment variables
     ENV = EnvironmentVariables {
+        // Checks & sets, if 'PORT' environment variable is set, else sets passed 'PORT' value
+        // this checks enables to comply with Heroku 'PORT' configuration when deploying to Heroku,
+        // even if during development one could set any value for 'PORT',
+        // but in production, that 'PORT' value will be set by Heroku using environment varibales,
+        // thats why it is mandatory to handle the provided 'PORT' value by Heroku.
+        
         // setting 'PORT' from environment varables,
-        // if no 'PORT' found in environment, then set passed 'PORT' value 
-        Port: func() string {
-                if value, ok := os.LookupEnv("PORT"); ok {
-                    return value
-                } else {
-                    return port
-                }
-            }(),
+        // if no 'PORT' found in environment, then set passed 'PORT' value
+        // NO NEED TO EDIT THIS
+        Port: func() string { if value, ok := os.LookupEnv("PORT"); ok {return value} else {return port} }(),
     }
 }
