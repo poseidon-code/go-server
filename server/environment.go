@@ -16,6 +16,8 @@ type EnvironmentVariables struct {
     Port    string
 
     // other .env fields should also be added for convenience of accessing/structuring them
+    MDBUserName     string
+    MDBPassword     string
 }
 
 
@@ -44,5 +46,8 @@ func LoadEnvironment(port string) {
         // if no 'PORT' found in environment, then set passed 'PORT' value
         // NO NEED TO EDIT THIS
         Port: func() string { if value, ok := os.LookupEnv("PORT"); ok {return value} else {return port} }(),
+
+        MDBUserName: os.Getenv("MONGODB_USERNAME"),
+        MDBPassword: os.Getenv("MONGODB_PASSWORD"),
     }
 }
