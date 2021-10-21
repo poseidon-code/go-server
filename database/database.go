@@ -23,11 +23,10 @@ var Client *mongo.Client
 
 
 func Connect() {
-    client, err := mongo.NewClient(options.Client().ApplyURI(URI)); if err!=nil {
+    Client, err := mongo.NewClient(options.Client().ApplyURI(URI)); if err!=nil {
         s.Log.Fatalln("Error connecting to database :\n", err)
 	}
-    client.Connect(CTX)
-    Client = client
+    Client.Connect(CTX)
 }
 
 func Disconnect() {
