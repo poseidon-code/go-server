@@ -9,13 +9,12 @@ import (
 
 // Home `/` route handler for all http Methods
 func Home(w http.ResponseWriter, r *http.Request) {
-    s.Headers(w)                    // include Request Headers
+    s.Headers(&w)                    // include Request Headers
 
     query := r.URL.Query()
 
     if r.URL.Path == "/" {
         switch r.Method {           // handle methods on `/`
-        case http.MethodOptions:
         case http.MethodGet:        // handle GET on `/`
             if len(query)==0 {      // default (`/`)
                 c.GetHome(w, r)

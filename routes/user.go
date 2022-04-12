@@ -9,13 +9,12 @@ import (
 
 // User `/user/` route handler for all http Methods
 func User(w http.ResponseWriter, r *http.Request) {
-    s.Headers(w)                            // include Request Headers
+    s.Headers(&w)                            // include Request Headers
 
     query := r.URL.Query()
     
     if r.URL.Path == "/user/" {             // handle `/user/` route
         switch r.Method {                   // handle methods on `/user/`
-        case http.MethodOptions:
         case http.MethodGet:                // handle GET on `/user/`
             if query["id"]!=nil && len(query)==1 {          // use query 'id' (`/user/?id=`)
                 c.GetUserId(w, r)
