@@ -21,7 +21,7 @@ type EnvironmentVariables struct {
 }
 
 
-var ENV EnvironmentVariables
+var ENV *EnvironmentVariables
 
 
 // Loads Environment variables before working with server.
@@ -35,13 +35,13 @@ func LoadEnvironment(port string) {
 
 
     // setting environment variables
-    ENV = EnvironmentVariables {
+    ENV = &EnvironmentVariables {
         // Checks & sets, if 'PORT' environment variable is set, else sets passed 'PORT' value
         // this checks enables to comply with Heroku 'PORT' configuration when deploying to Heroku,
         // even if during development one could set any value for 'PORT',
-        // but in production, that 'PORT' value will be set by Heroku using environment varibales,
+        // but in production, that 'PORT' value will be set by Heroku using environment variables,
         // thats why it is mandatory to handle the provided 'PORT' value by Heroku.
-        
+
         // setting 'PORT' from environment varables,
         // if no 'PORT' found in environment, then set passed 'PORT' value
         // NO NEED TO EDIT THIS
